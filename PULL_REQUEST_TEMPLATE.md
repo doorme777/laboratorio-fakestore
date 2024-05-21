@@ -1,13 +1,13 @@
 ## DESCRIPTION
 
-Solución al reto:
+Solución al reto: fakestore.
 
-Nombre:
-Usuario Platzi:
+Nombre: Jesús Adrian.
+Usuario Platzi: LosLentesDelaCuadra.
 
 ## Reto:
 
-- [ ] Primer problema
+- [ o ] Primer problema
 - [ ] Segundo problema
 - [ ] Tercer problema
 - [ ] Cuarto Problema
