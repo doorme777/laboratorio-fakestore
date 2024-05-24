@@ -1,21 +1,36 @@
 const $app = document.getElementById("app");
 const $observe = document.getElementById("observe");
 const API = "https://api.escuelajs.co/api/v1/products";
+const pagination = Number(localStorage.getItem("pagination"));
 let petition = 5;
 
+window.addEventListener("load", () => {
+  localStorage.removeItem("pagination");
+  position();
+  loadData();
+  intersectionObserver.observe($observe);
+  setTimeout(() => {
+    $observe.style.display = "block";
+  }, 2000);
+});
+
 const getData = (api) => {
-  const apiLocal = localStorage.getItem("pagination") ?? petition;
-  console.log(apiLocal);
-  fetch(`${api}?offset=${apiLocal}&limit=10`)
+  const apiLocal = pagination ?? petition;
+  fetch(`${api}?offset=${apiLocal}&limit=10`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => response.json())
     .then((response) => {
       let products = response;
-      console.log(products);
       let output = products.map((product) => {
         const { title, price, image } = product;
+        // Agregar una imagen por defecto en caso de que no haya una
+        const imageDefault = "../public/assets/not_found.webp";
         return `
         <article class="Card">
-          <img src="${image}" alt="${title}"/>
+          <img src="${image ?? imageDefault}" alt="${title}"/>
           <h2>
             ${title}
             <small>$ ${price}</small>
@@ -24,37 +39,36 @@ const getData = (api) => {
         `;
       });
       let newItem = document.createElement("section");
-      newItem.classList.add("Item");
+      newItem.classList.add("Items");
       newItem.innerHTML = output;
       $app.appendChild(newItem);
     })
     .catch((error) => console.log(error));
 };
 
-const loadData = () => {
-  getData(API);
+const loadData = async () => {
+  await getData(API);
+};
+
+const position = () => {
+  const stringifyPetition = JSON.stringify(petition);
+  localStorage.setItem("pagination", stringifyPetition);
+  console.log(localStorage.getItem("pagination"));
 };
 
 const intersectionObserver = new IntersectionObserver(
   (entries) => {
     if (entries[0].isIntersecting) {
-      // aquí nos dara un true solo cuando llegemos hasta abajo y que encontremos el elemento que estamos observando.
-      petition += 5;
-      getData(API);
-      position();
+      loadData();
     }
   },
   {
-    root: $observe,
-    rootMargin: "0px 0px 100% 0px",
-    threshold: 0,
+    root: null,
+    rootMargin: "0px 0px 0px 0px",
+    threshold: 0.5,
   }
 );
 
-intersectionObserver.observe($observe);
-
-const position = () => {
-  localStorage.setItem("pagination", petition);
-};
-
-loadData();
+pagination !== 195
+  ? intersectionObserver.observe($observe)
+  : intersectionObserver.unobserve($observe);
