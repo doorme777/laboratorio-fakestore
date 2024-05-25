@@ -9,7 +9,7 @@ Usuario Platzi: LosLentesDelaCuadra.
 
 - [ o ] Primer problema
 - [ o ] Segundo problema
-- [ ] Tercer problema
+- [ o ] Tercer problema
 - [ ] Cuarto Problema
 - [ ] Quinto Problema
 - [ ] Sexto Problema
