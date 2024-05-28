@@ -7,7 +7,7 @@ export default defineConfig(({ command }) => {
       root: "./public",
       base: "",
       server: {
-        port: 3000,
+        port: 8080,
         open: true,
       },
     };

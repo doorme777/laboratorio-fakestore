@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "FakeStore",
   "main": "index.js",
-  "exports": {
-    "import": "./**.js",
-    "require": "./**.cjs"
-  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -31,6 +27,6 @@
     "vite": "^5.2.11"
   },
   "dependencies": {
-    "cypress": "^10.2.0"
+    "cypress": "^13.10.0"
   }
 }
