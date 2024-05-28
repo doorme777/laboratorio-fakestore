@@ -11,5 +11,5 @@ Usuario Platzi: LosLentesDelaCuadra.
 - [ o ] Segundo problema
 - [ o ] Tercer problema
 - [ o ] Cuarto Problema
-- [ ] Quinto Problema
+- [ o ] Quinto Problema
 - [ ] Sexto Problema
