@@ -2,16 +2,10 @@ import { SkeletonCard } from "./template/SkeletonCard.js";
 // import Card from "./template/Card.js";
 const $app = document.getElementById("app");
 const $observe = document.getElementById("observe");
-// const loading = document.getElementById("loading");
+const loading = document.querySelector(".loading");
 const API = "https://api.escuelajs.co/api/v1/products";
 localStorage["pagination"] = 5;
 let initialState = true;
-
-// document.onreadystatechange = () => {
-//   if (document.readyState === "complete") {
-//     loading.style.display = "none";
-//   }
-// };
 
 window.addEventListener("beforeunload", () => {
   localStorage.removeItem("pagination");
@@ -56,7 +50,10 @@ const getData = (api) => {
       }
     })
     .catch((error) => {
-      console.log("Error", error);
+      const newItem = document.createElement("h2");
+      newItem.innerHTML = "Error al cargar los productos: " + error;
+      loading.style.display = "none";
+      $app.appendChild(newItem);
     });
 };
 
